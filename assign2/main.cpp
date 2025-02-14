@@ -14,8 +14,6 @@
 #include <string>
 #include <unordered_set>
 
-#include "utils.h"
-
 std::string kYourName = "Xiaochen Zhang"; // Don't forget to change this!
 
 /**
@@ -96,5 +94,5 @@ std::string get_match(std::queue<const std::string*>& matches) {
   }
 }
 
-/* #### Please don't modify this call to the autograder! #### */
-int main() { return run_autograder(); }
+/* #### Please don't remove this line! #### */
+#include "autograder/utils.hpp"
