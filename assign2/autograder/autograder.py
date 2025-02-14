@@ -56,7 +56,7 @@ def test_match():
     expected_matches = {
         name for name in all_students if get_initials(name) == student_initials
     }
-
+    
     match = student_match.split("Your match is: ")[1].strip()
 
     if match != "NO MATCHES FOUND.":

@@ -16,7 +16,7 @@
 
 #include "utils.h"
 
-std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
+std::string kYourName = "Xiaochen Zhang"; // Don't forget to change this!
 
 /**
  * Takes in a file name and returns a set containing all of the applicant names as a set.
@@ -31,6 +31,29 @@ std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
  */
 std::set<std::string> get_applicants(std::string filename) {
   // STUDENT TODO: Implement this function.
+  std::ifstream istream(filename.c_str());
+  std::set<std::string> result;
+
+  if(!istream.is_open()) {
+    std::cerr << "打开文件失败" << std::endl;
+    return result;
+  }
+
+  std::string line;
+  while(getline(istream, line)) {
+    result.insert(line);
+  }
+
+  return result;
+}
+
+bool is_initials_equal(std::string n1, std::string n2) {
+  std::string r1 = n1.substr(0, 1);
+  r1 += n1.substr(n1.find(" ") + 1, 1);
+  std::string r2 = n2.substr(0, 1);
+  r2 += n2.substr(n2.find(" ") + 1, 1);
+
+  return r1 == r2;
 }
 
 /**
@@ -43,6 +66,14 @@ std::set<std::string> get_applicants(std::string filename) {
  */
 std::queue<const std::string*> find_matches(std::string name, std::set<std::string>& students) {
   // STUDENT TODO: Implement this function.
+  std::queue<const std::string*> result;
+  for(const auto& student_name : students) {
+    if(is_initials_equal(name, student_name)) {
+      result.push(&student_name);
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -57,6 +88,12 @@ std::queue<const std::string*> find_matches(std::string name, std::set<std::stri
  */
 std::string get_match(std::queue<const std::string*>& matches) {
   // STUDENT TODO: Implement this function.
+  if(matches.empty()) {
+    return std::string{"NO MATCHES FOUND."};
+  } else {
+    const std::string* result = matches.front();
+    return *result;
+  }
 }
 
 /* #### Please don't modify this call to the autograder! #### */
